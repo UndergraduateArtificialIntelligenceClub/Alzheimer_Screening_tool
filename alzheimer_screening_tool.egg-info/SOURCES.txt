@@ -1,0 +1,8 @@
+README.md
+main.py
+pyproject.toml
+alzheimer_screening_tool.egg-info/PKG-INFO
+alzheimer_screening_tool.egg-info/SOURCES.txt
+alzheimer_screening_tool.egg-info/dependency_links.txt
+alzheimer_screening_tool.egg-info/requires.txt
+alzheimer_screening_tool.egg-info/top_level.txt

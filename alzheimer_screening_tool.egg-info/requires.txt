@@ -1,0 +1,4 @@
+gradio<6,>=5.49
+torch>=2.9.0
+torchaudio>=2.9.0
+transformers>=4.57.1

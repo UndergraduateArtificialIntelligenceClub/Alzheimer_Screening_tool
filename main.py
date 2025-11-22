@@ -1,5 +1,7 @@
 import gradio as gr
 import time
+import numpy as np
+from transformers import pipeline
 
 info = """
 ## About
@@ -9,6 +11,8 @@ Alzheimer's disease (AD) is a progressive neurodegenerative disease that impairs
 Symptoms of early AD often include speech impairment, object naming problems, and reduction in vocabulary. These linguistic signs can often be identified in speech patterns using NLP methods. This tool uses [BERT](https://en.wikipedia.org/wiki/BERT_(language_model))-family models trained on the ADReSS dataset from [DementiaBank](https://talkbank.org/dementia/) to estimate the likelihood of early-stage AD.
 """
 
+transcriber = pipeline("automatic-speech-recognition", model="openai/whisper-base.en", device="cpu")
+
 def show_image(checkbox_state):
     return gr.update(visible=checkbox_state)
 
@@ -16,8 +20,18 @@ def show_image(checkbox_state):
 def analyze_speech(audio):
     if audio is None:
         return ["", ""]
-    # Simulate thinking
-    time.sleep(1)
+    
+    sample_rate, samples = audio
+
+    samples = samples.astype(np.float32) / np.iinfo(samples.dtype).max
+
+    result = transcriber({"array": samples, "sampling_rate": sample_rate})
+
+    result = result["text"].strip()
+
+    print(result)
+
+    
     return [
             gr.Textbox("You do not have Alzheimer's!"),
             gr.Textbox("You said blah blah blah")
@@ -63,6 +77,7 @@ with gr.Blocks(theme=gr.themes.Ocean()) as demo:
         with gr.Column():
             audio_input = gr.Audio(
                 sources="microphone",
+                type="numpy",
                 label="Describe the image",
             )
 
