@@ -1,6 +1,9 @@
 import gradio as gr
+import tempfile
 import time
+import os
 import numpy as np
+import soundfile as sf
 from transformers import pipeline
 
 info = """
@@ -23,18 +26,24 @@ def analyze_speech(audio):
     
     sample_rate, samples = audio
 
-    samples = samples.astype(np.float32) / np.iinfo(samples.dtype).max
+    samples = samples.astype(np.float32)
+    max_val = np.max(np.abs(samples)) or 1.0
+    samples /= max_val
 
-    result = transcriber({"array": samples, "sampling_rate": sample_rate})
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
+        sf.write(tmp.name, samples, sample_rate)
+        tmp_path = tmp.name
+
+    try:
+        result = transcriber(tmp_path, return_timestamps=True)
+    finally:
+        os.remove(tmp_path)
 
     result = result["text"].strip()
-
-    print(result)
-
     
     return [
             gr.Textbox("You do not have Alzheimer's!"),
-            gr.Textbox("You said blah blah blah")
+            gr.Textbox(result or "No speech detected / I couldn't understand you - try again!")
     ]
 
 def clear_all_components():
