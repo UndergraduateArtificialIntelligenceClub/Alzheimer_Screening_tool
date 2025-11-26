@@ -5,6 +5,7 @@ Simple Gradio demo that records a short cookie-theft description, runs Whisper t
 ## Requirements
 
 - Python 3.13+
+- Chocolatey (Package Manager) to easily install some of the dependencies on Windows. Instructions are here: https://chocolatey.org/install
 - FFmpeg (speech-to-text needs it)
   - macOS: `brew install ffmpeg`
   - Ubuntu/Debian: `sudo apt install ffmpeg`
