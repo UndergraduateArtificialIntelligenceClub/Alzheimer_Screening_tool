@@ -8,9 +8,11 @@ Simple Gradio demo that records a short cookie-theft description, runs Whisper t
 - FFmpeg (speech-to-text needs it)
   - macOS: `brew install ffmpeg`
   - Ubuntu/Debian: `sudo apt install ffmpeg`
+  - Windows: `choco install ffmpeg`
 - libsndfile (used by the `soundfile` Python package)
   - macOS Homebrew installs this automatically with `pip install soundfile`
   - Ubuntu/Debian: `sudo apt install libsndfile1`
+  - Windows: `choco install libsndfile`
 - (Optional) `python3 -m venv .venv && source .venv/bin/activate`
 
 ## Install
@@ -21,6 +23,8 @@ pip install -e .That pulls in:
 - `torch`, `torchaudio`
 - `transformers`
 - `soundfile` (for temp WAV handling)
+
+Make sure to also install ffmpeg and libsndfile using the instructions under "Requirements" above
 
 ## Run
 
