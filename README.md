@@ -4,16 +4,16 @@ Simple Gradio demo that records a short cookie-theft description, runs Whisper t
 
 ## Requirements
 
-- Python 3.13+
-- Chocolatey (Package Manager) to easily install some of the dependencies on Windows. Instructions are here: https://chocolatey.org/install
+- Python 3.13+ (required)
+- Chocolatey (Package Manager) to easily install some of the dependencies on Windows. Instructions are here: https://chocolatey.org/install (run as adminstrator in powershell)
 - FFmpeg (speech-to-text needs it)
   - macOS: `brew install ffmpeg`
   - Ubuntu/Debian: `sudo apt install ffmpeg`
-  - Windows: `choco install ffmpeg`
+  - Windows: `choco install ffmpeg` (run as adminstrator in powershell)
 - libsndfile (used by the `soundfile` Python package)
   - macOS Homebrew installs this automatically with `pip install soundfile`
   - Ubuntu/Debian: `sudo apt install libsndfile1`
-  - Windows: `choco install libsndfile`
+  - Windows: `choco install libsndfile` (run as adminstrator in powershell)
 - (Optional) `python3 -m venv .venv && source .venv/bin/activate`
 
 ## Install
